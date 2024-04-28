@@ -20,9 +20,11 @@
     "clsx": "^2.1.1",
     "constructs": "^10.0.0",
     "lucide-react": "^0.376.0",
+    "next-themes": "^0.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.3",
+    "sonner": "^1.4.41",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7"
   },

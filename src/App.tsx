@@ -3,10 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form";
-// import {
-//   APIGatewayClient,
-//   GetAccountCommand,
-// } from "@aws-sdk/client-api-gateway";
+import { toast } from "sonner";
 
 type Inputs = {
   textInput: string;
@@ -14,30 +11,12 @@ type Inputs = {
 };
 
 const isTextFile = (fileName: string): boolean => {
-  const acceptedExtensions = ["txt", "text", "yml"];
+  const acceptedExtensions = ["txt", "text"];
   const fileExtension = fileName.split(".").pop()?.toLowerCase();
   return acceptedExtensions.includes(fileExtension!);
 };
 
 function App() {
-  // const client = new APIGatewayClient({ region: "us-east-1" });
-  // const params = {
-  //   /** input parameters */
-  // };
-  // const command = new GetAccountCommand(params);
-  // console.log(command);
-
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       const response = await client.send(command);
-  //       console.log(response);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   })();
-  // }, []);
-
   const {
     register,
     handleSubmit,
@@ -50,19 +29,22 @@ function App() {
       if (!isTextFile(file.name)) {
         throw new Error("Invalid file type");
       }
-      const preSignerResponse = await axios.post(
-        "https://p6a52727uk.execute-api.us-east-1.amazonaws.com/prod/getPreSignedUrl",
-        { fileName: file.name }
-      );
+      const baseURL =
+        "https://qlmm7rzllk.execute-api.us-east-1.amazonaws.com/prod";
+      const preSignerResponse = await axios.post(baseURL + "/getPreSignedUrl", {
+        fileName: file.name,
+      });
       const preSignedUrl = preSignerResponse.data.uploadUrl;
 
       const uploadS3Response = await axios.put(preSignedUrl, file);
       if (uploadS3Response.status === 200) {
-        const response = await axios.post(
-          "https://p6a52727uk.execute-api.us-east-1.amazonaws.com/prod/updateDB",
-          { textInput: data.textInput, fileInputPath: file.name }
-        );
-        console.log(response);
+        const response = await axios.post(baseURL + "/updateDB", {
+          textInput: data.textInput,
+          fileInputPath: file.name,
+        });
+        toast(response.data.message, {
+          action: { label: "X", onClick: () => {} },
+        });
       }
     } catch (error) {
       console.error(error);
