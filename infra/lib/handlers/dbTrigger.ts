@@ -29,18 +29,11 @@ export const handler = async (event: DynamoDBStreamEvent) => {
 
     const record = event.Records[0];
     if (record["eventName"] == "INSERT") {
-      const id = nanoid();
-      const textInput = record.dynamodb!.NewImage!.textInput.S;
-      const fileInputPath = record.dynamodb!.NewImage!.fileInputPath.S;
-
-      if (fileInputPath === undefined || textInput === undefined) {
-        return {
-          statusCode: 200,
-          body: JSON.stringify({ message: "Programatically added by ec2" }),
-        };
-      }
-      const fip = fileInputPath;
-      const fileOutputPath = fileBucketName + "/Output_" + fip.split("/").pop();
+      const new_id = nanoid();
+      const original_id = record.dynamodb!.NewImage!.id.S;
+      /* const textInput = record.dynamodb!.NewImage!.textInput.S;
+      const fileInputPath = record.dynamodb!.NewImage!.fileInputPath.S; */
+      /* CHANGED FLOW ACCORDING TO REQUIREMENTS FOR textInput / fileInput. GETTING DATA FROM DYNAMODB FROM SCRIPT AS REQUESTED */
 
       const input = {
         ImageId: "ami-04e5276ebb8451442",
@@ -51,9 +44,9 @@ export const handler = async (event: DynamoDBStreamEvent) => {
         IamInstanceProfile: {
           Name: instanceProfileVarName,
         },
-        SecurityGroupIds: ["sg-09d1c6065116c8af3"],
         UserData: encode(
-          `#!/bin/bash\naws s3 cp "s3://${scriptUri}" task.sh\nbash task.sh ${fileInputPath} "${textInput}" ${fileOutputPath} ${tableName} ${id}\nshutdown -h now`
+          /*           `#!/bin/bash\naws s3 cp "s3://${scriptUri}" task.sh\nbash task.sh ${fileInputPath} "${textInput}" ${fileOutputPath} ${tableName} ${id}\nshutdown -h now`
+           */ `#!/bin/bash\naws s3 cp "s3://${scriptUri}" task.sh\nbash task.sh ${original_id} ${tableName} ${new_id}\nshutdown -h now`
         ),
       } as RunInstancesCommandInput;
 
