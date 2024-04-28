@@ -36,7 +36,7 @@ export const handler = async (event: DynamoDBStreamEvent) => {
       /* CHANGED FLOW ACCORDING TO REQUIREMENTS FOR textInput / fileInput. GETTING DATA FROM DYNAMODB FROM SCRIPT AS REQUESTED */
 
       const input = {
-        ImageId: "ami-04e5276ebb8451442",
+        ImageId: "ami-04e5276ebb8451442", // Amazon Linux 2023
         InstanceType: "t2.micro",
         MaxCount: 1,
         MinCount: 1,

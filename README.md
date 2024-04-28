@@ -30,10 +30,9 @@ https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/iam/
 
 https://stackoverflow.com/a/5257398
 
+https://www.digitalocean.com/community/tutorials/how-to-transform-json-data-with-jq
+
 https://linuxize.com/post/bash-if-else-statement/
 
 TODO:
-change flow of getting details from dynamodb
-remove linux ami hardcoded value
-use cognito - register/login functionality
 fix stack code structure

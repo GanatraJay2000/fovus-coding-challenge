@@ -70,6 +70,7 @@ export class InfraStack extends cdk.Stack {
       "POST",
       new cdk.aws_apigateway.LambdaIntegration(getPresignedUrlLambda)
     );
+
     getPreSignedUrlAPI.addCorsPreflight({
       allowOrigins: ["*"],
       allowMethods: ["POST"],
