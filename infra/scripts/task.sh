@@ -11,6 +11,7 @@ if [ $? -ne 0 ]; then
 fi
 
 textInput=$(echo $response | jq -r '.Item.textInput.S')
+textInput=$(echo "${textInput}" | tr -d '\n')
 fileInputPath=$(echo $response | jq -r '.Item.fileInputPath.S')
 if [ -z "$textInput" ] || [ -z "$fileInputPath" ]; then
     echo "Error: textInput or fileInputPath Undefined."
