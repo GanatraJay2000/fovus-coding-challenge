@@ -168,7 +168,6 @@ export class InfraStack extends cdk.Stack {
           TABLE_NAME: inputTable.tableName,
           FILE_BUCKET_NAME: fileInputBucket.bucketName,
           SCRIPTS_BUCKET_NAME: scriptsBucket.bucketName,
-          EC2_INSTANCE_PROFILE_NAME: tempEC2InstanceProfile.ref.toString(),
           INSTANCE_PROFILE_VAR_NAME: instanceProfileVarName,
         },
       }

@@ -15,7 +15,6 @@ export const handler = async (event: DynamoDBStreamEvent) => {
     const fileBucketName = process.env.FILE_BUCKET_NAME;
     const scriptsBucketName = process.env.SCRIPTS_BUCKET_NAME;
     const instanceProfileVarName = process.env.INSTANCE_PROFILE_VAR_NAME;
-
     if (
       tableName === undefined ||
       fileBucketName === undefined ||
@@ -45,8 +44,7 @@ export const handler = async (event: DynamoDBStreamEvent) => {
           Name: instanceProfileVarName,
         },
         UserData: encode(
-          /*           `#!/bin/bash\naws s3 cp "s3://${scriptUri}" task.sh\nbash task.sh ${fileInputPath} "${textInput}" ${fileOutputPath} ${tableName} ${id}\nshutdown -h now`
-           */ `#!/bin/bash\naws s3 cp "s3://${scriptUri}" task.sh\nbash task.sh ${original_id} ${tableName} ${new_id}\nshutdown -h now`
+          `#!/bin/bash\naws s3 cp "s3://${scriptUri}" task.sh\nbash task.sh ${original_id} ${tableName} ${new_id}\nshutdown -h now`
         ),
       } as RunInstancesCommandInput;
 
