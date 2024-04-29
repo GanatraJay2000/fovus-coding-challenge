@@ -8,6 +8,9 @@ A React app with AWS microservices as a backend.
 
 **AWS:** API Gateway, IAM, Lambda, EC2, DynamoDB, S3
 
+> [!NOTE]
+> The last command `npm run cdk deploy` outputs an `InfraStack.ApiEndpoint`. (Highlighted in blue in below screenshot) COPY THAT.
+
 ## Steps to deploy locally
 
 You need the AWS CLI and the AWS CDK installed. Here is how you can do that: [AWS CLI Installation](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
@@ -25,8 +28,8 @@ $ cdk bootstrap aws://<ACCOUNT-NUMBER/ID>/us-east-1      # Run the aws bootstrap
 $ npm run cdk deploy      # Press 'y' when prompted.
 ```
 
-> [!NOTE]
-> The last command `npm run cdk deploy` outputs an `InfraStack.ApiEndpoint`. (Highlighted in blue in below screenshot) COPY THAT.
+> [!CAUTION]
+> EC2 instance created in us-east-1
 
 ![CDK Deploy Command Output](./screenshots/cdk_deploy_output.png)
 
