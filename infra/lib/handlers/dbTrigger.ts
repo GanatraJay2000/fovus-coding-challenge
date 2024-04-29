@@ -7,7 +7,7 @@ import { DynamoDBStreamEvent } from "aws-lambda";
 import { encode } from "js-base64";
 import { nanoid } from "nanoid";
 
-const ec2Client = new EC2Client({ region: "us-east-1" });
+const ec2Client = new EC2Client({});
 
 export const handler = async (event: DynamoDBStreamEvent) => {
   try {
