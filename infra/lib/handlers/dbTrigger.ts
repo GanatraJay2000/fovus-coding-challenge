@@ -30,8 +30,15 @@ export const handler = async (event: DynamoDBStreamEvent) => {
     if (record["eventName"] == "INSERT") {
       const new_id = nanoid();
       const original_id = record.dynamodb!.NewImage!.id.S;
-      /* const textInput = record.dynamodb!.NewImage!.textInput.S;
-      const fileInputPath = record.dynamodb!.NewImage!.fileInputPath.S; */
+      const textInput = record.dynamodb!.NewImage!.textInput.S;
+      const fileInputPath = record.dynamodb!.NewImage!.fileInputPath.S;
+
+      if (fileInputPath === undefined || textInput === undefined) {
+        return {
+          statusCode: 200,
+          body: JSON.stringify({ message: "Programatically added by ec2" }),
+        };
+      }
       /* CHANGED FLOW ACCORDING TO REQUIREMENTS FOR textInput / fileInput. GETTING DATA FROM DYNAMODB FROM SCRIPT AS REQUESTED */
 
       const input = {
