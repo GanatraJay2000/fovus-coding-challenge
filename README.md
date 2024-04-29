@@ -10,8 +10,10 @@ A React app with AWS microservices as a backend.
 
 ## Steps to deploy locally
 
+You need the AWS CLI and the AWS CDK installed. Here is how you can do that: [AWS CLI Installation](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+
 ```console
-$ npm -g install typescript
+$ npm install -g aws-cdk
 $ git clone https://github.com/GanatraJay2000/fovus-coding-challenge-frontend.git
 
 cd into directory (fovus-coding-challenge-frontend)
