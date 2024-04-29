@@ -1,4 +1,51 @@
-# fovus-coding-challenge-frontend
+# fovus-coding-challenge-~~frontend~~-repo
+
+A React app with AWS microservices as a backend.
+
+### Stack:
+
+**Frontend:** React, TailwindCSS, shadcn/ui, axios, react-hook-forms
+
+**AWS:** API Gateway, IAM, Lambda, EC2, DynamoDB, S3
+
+## Steps to deploy locally
+
+```console
+$ npm -g install typescript
+$ git clone https://github.com/GanatraJay2000/fovus-coding-challenge-frontend.git
+
+cd into directory (fovus-coding-challenge-frontend)
+
+$ npm install
+
+$ cd infra
+$ cdk bootstrap aws://<ACCOUNT-NUMBER/ID>/us-east-1      # Run the aws bootstrap command with your account_number
+$ npm run cdk deploy      # Press 'y' when prompted.
+```
+
+> [!NOTE]
+> The last command `npm run cdk deploy` outputs an `InfraStack.ApiEndpoint`. (Highlighted in blue in below screenshot) COPY THAT.
+
+![CDK Deploy Command Output](./screenshots/cdk_deploy_output.png)
+
+Go to root folder of your app. Create a `.env`file, and paste the url there like:
+
+```console
+VITE_BASE_URL="<your_url_output_from_cdk_deploy_command>"
+```
+
+![.ENV File](./screenshots/env%20file.png)
+THEN FINALLY: From the root of your app, open terminal and run this command:
+
+```console
+$ npm run dev
+```
+
+![RUN React App](./screenshots/run.png)
+
+The app starts working.
+
+![RUN React App](./screenshots/react%20app.png)
 
 ## References:
 
@@ -33,6 +80,3 @@ https://stackoverflow.com/a/5257398
 https://www.digitalocean.com/community/tutorials/how-to-transform-json-data-with-jq
 
 https://linuxize.com/post/bash-if-else-statement/
-
-TODO:
-fix stack code structure
