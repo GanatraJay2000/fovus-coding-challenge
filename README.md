@@ -2,6 +2,8 @@
 
 A React app with AWS microservices as a backend.
 
+> [Live Site Deployed on Amplify](https://main.dw5f52o1ru15e.amplifyapp.com/)
+
 ### Stack:
 
 **Frontend:** React, TailwindCSS, shadcn/ui, axios, react-hook-forms
