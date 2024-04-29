@@ -33,14 +33,14 @@ function App() {
         throw new Error("Invalid file type");
       }
       const baseURL = import.meta.env.VITE_BASE_URL;
-      const preSignerResponse = await axios.post(baseURL + "/getPreSignedUrl", {
+      const preSignerResponse = await axios.post(baseURL + "getPreSignedUrl", {
         fileName: file.name,
       });
       const preSignedUrl = preSignerResponse.data.uploadUrl;
 
       const uploadS3Response = await axios.put(preSignedUrl, file);
       if (uploadS3Response.status === 200) {
-        const response = await axios.post(baseURL + "/updateDB", {
+        const response = await axios.post(baseURL + "updateDB", {
           textInput: data.textInput,
           fileInputPath: file.name,
         });
